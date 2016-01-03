@@ -13,12 +13,13 @@ categories: setup env
     配置文件在/usr/local/Cellar/hadoop/2.7.1/libexec/etc/hadoop
 ## 2. 配置修改
 1. 修改hadoop-env.sh
-将 export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"
+将 ```export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true"```
 修改为
-export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+```export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security.krb5.realm= -Djava.security.krb5.kdc="```
 
 2. 修改core-site.xml
 在configuration配置项内加入多个propery。
+```
 <configuration>
     <property>     
         <name>hadoop.tmp.dir</name>     
@@ -30,17 +31,21 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security
         <value>hdfs://localhost:9000</value>
     </property>
 </configuration>
+```
 
 3. 编辑mapred-site.xml. 默认没有，将mapred-site.xml.templete重命名为mapred-site.xml
 添加下面的属性
+```
 <configuration>
     <property>
         <name>mapred.job.tracker</name>
         <value>localhost:9010</value>   
     </property> 
 </configuration>
+```
 4. 编辑hdfs-site.xml
 变量dfs.replication指定了每个HDFS数据库的复制次数。 通常为3, 由于我们只有一台主机和一个伪分布式模式的DataNode，将此值修改为1。
+```
 <configuration>
     <property>
         <name>dfs.replication</name>
@@ -51,23 +56,26 @@ export HADOOP_OPTS="$HADOOP_OPTS -Djava.net.preferIPv4Stack=true -Djava.security
         <value>4096</value>
     </property>
 </configuration>
+```
 
 ## 3. 启动并运行例子
 1. 依次执行下面三个命令
-hadoop namenode -format
-start-dfs.sh
-start-yarn.sh
+
+    hadoop namenode -format
+    start-dfs.sh
+    start-yarn.sh
 
 可以通过jps查看是否正确运行
-6597 DataNode
-6838 ResourceManager
-6935 NodeManager
-6505 NameNode
-10427 Main
-6715 SecondaryNameNode
+
+    6597 DataNode
+    6838 ResourceManager
+    6935 NodeManager
+    6505 NameNode
+    10427 Main
+    6715 SecondaryNameNode
 如果发现没有DataNode那么就需要到core-site.xml中找到hadoop.tmp.dir删除该目录下内容再重启。
 2. 运行一个例子
-hadoop jar /usr/local/Cellar/hadoop/2.7.1/libexec/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar pi 2 5
+```hadoop jar /usr/local/Cellar/hadoop/2.7.1/libexec/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar pi 2 5```
 得到的结果
     File Input Format Counters
     Bytes Read=236
