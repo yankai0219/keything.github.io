@@ -28,6 +28,8 @@ shell:
 
         echo -e "\e[0;31mhello\e[0m"
 
+
+
 2. 将出现WARN这一行绿色字体显示；出现ERR这一行加上红色背景色
 
         echo "ERRhello" > aa.txt
