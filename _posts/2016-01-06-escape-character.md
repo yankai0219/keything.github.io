@@ -5,6 +5,7 @@ date:   2016-01-04 22:00:01 +0800
 categories: basic knowledge 
 ---
 # 转义字符 escape character
+
 ## 0.概述
     转义字符标志着在一个字符序列中出现在它之后的后续几个字符是一种替代解释。
     判断某字符是否为转义字符由上下文确定。转义字符标志着转义序列escape sequence开始的那个字符。
@@ -24,6 +25,7 @@ categories: basic knowledge
 
 ## 2. 举例
 shell: 
+
 1. 输出红色hello
 
         echo -e "\e[0;31mhello\e[0m"
